@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <title>Report</title>
+    <style>
+        @page {
+            size: letter portrait;
+
+            @frame content_frame {
+                left: 50pt;
+                width: 512pt;
+                top: 50pt;
+                height: 692pt;
+                -pdf-frame-border: 1;
+                /* for debugging the layout */
+                padding: 5px 15px;
+            }
+        }
+
+        th,
+        td {
+            padding: 5px 15px;
+        }
+
+        th {
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        td {
+            font-size: 15px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1 style="text-align: center;">Monthly Report for {{date}}</h1>
+
+
+
+    <h1 style="text-align: center;"> Income: {{income}}</h1>
+
+    <h1 style="text-align: center;"> Expense: {{expense}}</h1>
+
+    <h1 style="text-align: center;"> Saving: {{saving}}</h1>
+
+    <h1>Expense:</h1>
+
+    <table border="1" style="border-collapse: collapse;">
+        <thead>
+            <tr>
+                <td>Category</td>
+                <td>Amount</td>
+
+            </tr>
+        </thead>
+
+        <tbody>
+            {% for key, value in expense_dict.items %}
+            <tr>
+                <td>{{key}}</td>
+                <td>{{value}}</td>
+
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <h1>Income:</h1>
+
+    <table border="1" style="border-collapse: collapse;">
+        <thead>
+            <tr>
+                <td>Category</td>
+                <td>Amount</td>
+
+            </tr>
+        </thead>
+
+        <tbody>
+            {% for key, value in income_dict.items %}
+            <tr>
+                <td>{{key}}</td>
+                <td>{{value}}</td>
+
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+
+</body>
+
+</html>

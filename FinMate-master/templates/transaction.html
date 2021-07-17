@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} Transaction{% endblock title %}
+
+{% block body %}
+
+<div class="page-wrapper">
+
+    <div class="page-breadcrumb">
+
+
+        {% if alert_flag %}
+        <div class="alert alert-info">
+            <strong>Info!</strong> Hey, according to your previous purchases, your overall experience with this item was
+            not
+            great. <a href="#" class="alert-link">We suggest you spend less on {{cat_name}}.</a>.
+        </div>
+        {% endif %}
+
+        <div class="container mt-5">
+
+            <!-- <h1 class="text-center mb-5">Transactions <a class="btn btn-primary" href="/export-csv" role="button">Export
+                CSV</a>
+        </h1> -->
+
+            <table id="myTable" class="table table-striped table-bordered display no-wrap">
+                <thead>
+                    <tr>
+                        <th scope="col">Category</th>
+                        <th scope="col">Amount</th>
+                        <th scope="col">Date</th>
+                        <th scope="col">Description</th>
+                    </tr>
+                </thead>
+                <tbody id="tbody" id="tbody">
+
+                    {% for t in alltransaction%}
+                    {% if t.category.is_expense %}
+                    <tr class="table-danger">
+                        {% else %}
+                    <tr class="table-success">
+                        {% endif %}
+                        <td>
+                            {{t.category.category_name}}
+                        </td>
+                        <td>
+                            {{t.amount}}
+                        </td>
+                        <td>
+                            {{t.date}}
+                        </td>
+                        <td>
+                            {{t.description}}
+                        </td>
+                    </tr>
+                    {% endfor %}
+
+
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+
+{% endblock body %}
+
+{% block ajaxhtml %}
+
+<script>
+    $(document).ready(function () {
+        $('#myTable').DataTable({
+            "order": []
+        });
+
+    });
+</script>
+
+{% endblock ajaxhtml %}
